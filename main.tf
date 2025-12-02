@@ -117,12 +117,12 @@ resource "azurerm_private_endpoint" "sql_pe" {
 }
 
 resource "azurerm_private_dns_zone_group" "dnsgroup" {
-  name                 = "sql-dns-zone-group"
-  resource_group_name  = azurerm_resource_group.rg.name
-  private_endpoint_id  = azurerm_private_endpoint.sql_pe.id
+  name                = "sql-dns-zone-group"
+  resource_group_name = azurerm_resource_group.rg.name
+  private_endpoint_id = azurerm_private_endpoint.sql_pe.id
 
   private_dns_zone_configs {
-    name              = "sql-zone-config"
+    name                = "sql-zone-config"
     private_dns_zone_id = azurerm_private_dns_zone.dns.id
   }
 }
