@@ -51,14 +51,14 @@ resource "azurerm_storage_account" "storage" {
 # VIRTUAL NETWORK + SUBNET
 # ---------------------------------------------------
 resource "azurerm_virtual_network" "vnet" {
-  name                = "vnet-dsba6190-cford38-dev-eastus-001"
+  name                = "vnet-dsba6190-zstorms-dev-eastus-001"
   address_space       = ["10.0.0.0/16"]
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
 }
 
 resource "azurerm_subnet" "subnet" {
-  name                 = "subnet-dsba6190-cford38-dev-eastus-001"
+  name                 = "subnet-dsba6190-zstorms-dev-eastus-001"
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.vnet.name
   address_prefixes     = ["10.0.1.0/24"]
@@ -68,8 +68,8 @@ resource "azurerm_subnet" "subnet" {
 # SQL SERVER
 # ---------------------------------------------------
 resource "azurerm_mssql_server" "sql_server" {
-  name                         = "sql-dsba6190-cford38-dev-001"
-  resource_group_name          = "rg-dsba6190-beta-eastus-001"
+  name                         = "sql-dsba6190-zstorms-dev-001"
+  resource_group_name          = azurerm_resource_group.rg.name
   location                     = azurerm_resource_group.rg.location
   version                      = "12.0"
   administrator_login          = "sqladminuser"
@@ -80,7 +80,7 @@ resource "azurerm_mssql_server" "sql_server" {
 # SQL DATABASE
 # ---------------------------------------------------
 resource "azurerm_mssql_database" "db" {
-  name        = "db-dsba6190-cford38-dev-001"
+  name        = "db-dsba6190-zstorms-dev-001"
   server_id   = azurerm_mssql_server.sql_server.id
   sku_name    = "S0"
   max_size_gb = 5
